@@ -1,38 +1,26 @@
-const { query } = require('./db');
+const { executeQuery } = require('./db');
 
-async function getCustomerCount() {
-  const result = await query('SELECT COUNT(*)::int AS count FROM customers');
-  return result.rows[0].count;
-}
+const getCustomerById = `
+SELECT * FROM customers WHERE customer_id = $1;
+`;
 
-async function getOrdersWithCustomers() {
-  const result = await query(`
-    SELECT o.order_id, c.full_name, o.order_status, o.created_at
-    FROM orders o
-    JOIN customers c ON c.customer_id = o.customer_id
-    ORDER BY o.order_id
-    LIMIT 10
-  `);
-  return result.rows;
-}
+const getOrders = `
+SELECT * FROM orders;
+`;
 
-async function getOrderSummary() {
-  const result = await query(`
-    SELECT
-      c.full_name,
-      COUNT(o.order_id) AS total_orders,
-      COALESCE(SUM(p.amount), 0)::numeric(10,2) AS total_paid
-    FROM customers c
-    LEFT JOIN orders o ON o.customer_id = c.customer_id
-    LEFT JOIN payments p ON p.order_id = o.order_id
-    GROUP BY c.customer_id, c.full_name
-    ORDER BY c.customer_id
-  `);
-  return result.rows;
-}
+const getCompletedOrders = `
+SELECT * FROM orders WHERE order_status = 'Completed';
+`;
+
+const paymentStatus = `
+SELECT payment_status FROM payments WHERE order_id = $1;
+`;
+
 
 module.exports = {
-  getCustomerCount,
-  getOrdersWithCustomers,
-  getOrderSummary,
+  getCustomerById,
+  getOrders,
+  getCompletedOrders,
+  paymentStatus,
 };
+
