@@ -7,7 +7,6 @@ test("Verify order exists", async () => {
         FROM orders
         WHERE order_id=1;
         `);
-  console.log(result);
   expect(result.rows.length).toBe(1);
 
   expect(result.rows[0].order_status).toBe("Completed");

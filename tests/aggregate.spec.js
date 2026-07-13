@@ -5,6 +5,5 @@ test("Total payment amount", async () => {
   const result = await executeQuery(`
          SELECT SUM(amount) total
         FROM payments;`);
-    console.log(result)
     expect(Number(result.rows[0].total)).toBeGreaterThan(100000);
 });

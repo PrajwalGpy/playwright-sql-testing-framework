@@ -24,6 +24,5 @@ test("highest_payment_by_method", async () => {
             WHERE
                 RANK = 1;
 `);
-  console.log(result);
   expect(result.rows.length).toBe(5);
 });

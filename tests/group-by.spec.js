@@ -11,7 +11,6 @@ test("Customer Order Count", async () => {
     ORDER BY customer_id;
     `);
 
-    console.log(result)
   expect(result.rows.length).toBeGreaterThan(0);
 });
 
