@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This repository provides a lightweight, automation-oriented framework for validating SQL behavior through Playwright test cases. The core objective is to exercise database-backed business logic against PostgreSQL and assert expected results with deterministic test checks.
+This repository provides a lightweight, automation-oriented framework for validating SQL behavior through Playwright test cases. The core objective is to exercise database-backed business logic against PostgreSQL and assert expected results with deterministic test checks..
 
 The project is useful for regression testing, schema validation, and data-quality checks where SQL queries must be verified repeatedly as application logic or database structures evolve.
 
